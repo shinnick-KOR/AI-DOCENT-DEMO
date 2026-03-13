@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samsung AI Home Docent - Free Demo</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(180deg, #f4f7fb 0%, #eef3fb 100%);
+      color: #111827;
+    }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 24px; }
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%);
+      color: white;
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: 0 18px 40px rgba(15,23,42,.2);
+      margin-bottom: 24px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: 36px; }
+    .hero p { margin: 0; line-height: 1.6; opacity: .92; }
+    .grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 24px; }
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 14px 30px rgba(15,23,42,.08);
+    }
+    .head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px; }
+    .head h2 { margin: 0; font-size: 24px; }
+    .badge {
+      background:#e8f0ff; color:#1d4ed8; padding:8px 12px; border-radius:999px;
+      font-size:13px; font-weight:700;
+    }
+    .row { display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
+    .field { display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+    .full { grid-column:1 / -1; }
+    label { font-size:14px; font-weight:700; }
+    input, select, textarea {
+      width:100%; padding:14px 16px; border-radius:14px; border:1px solid #d1d5db;
+      font-size:15px; outline:none; background:#fff;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color:#2563eb; box-shadow:0 0 0 4px rgba(37,99,235,.12);
+    }
+    textarea { min-height: 96px; resize: vertical; }
+    .btns { display:flex; gap:10px; flex-wrap:wrap; margin-top:8px; }
+    button {
+      border:0; border-radius:14px; padding:13px 16px; font-size:15px; font-weight:700;
+      cursor:pointer; transition:.15s ease;
+    }
+    button:hover { transform: translateY(-1px); }
+    .primary { background:#2563eb; color:#fff; }
+    .subtle { background:#edf2ff; color:#1d4ed8; }
+    .warning { background:#fff7ed; color:#c2410c; }
+    .chat {
+      background:#f8fafc; border:1px solid #e5e7eb; border-radius:20px; height:520px;
+      padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:14px;
+    }
+    .bubble {
+      max-width:88%; padding:14px 16px; border-radius:18px; line-height:1.6; white-space:pre-wrap;
+    }
+    .ai { align-self:flex-start; background:#eaf1ff; color:#1e3a8a; border-top-left-radius:6px; }
+    .user { align-self:flex-end; background:#111827; color:#fff; border-top-right-radius:6px; }
+    .chatInput { display:flex; gap:10px; margin-top:14px; }
+    .list { display:grid; gap:12px; margin-top:18px; }
+    .product {
+      border:1px solid #e5e7eb; border-radius:18px; padding:16px;
+      background:linear-gradient(180deg,#fff 0%,#f8fbff 100%);
+    }
+    .product h3 { margin:0 0 8px; font-size:18px; }
+    .product p { margin:0 0 10px; color:#4b5563; line-height:1.5; }
+    .tags { display:flex; gap:8px; flex-wrap:wrap; }
+    .tag {
+      padding:7px 11px; border-radius:999px; background:#eff6ff; color:#1d4ed8;
+      font-size:12px; font-weight:700;
+    }
+    .estimate {
+      margin-top:18px; background:#0f172a; color:#fff; border-radius:20px; padding:18px;
+    }
+    .estimate-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.1); }
+    .estimate-row:last-child { border-bottom:0; }
+    .total { display:flex; justify-content:space-between; font-size:20px; font-weight:800; margin-top:12px; }
+    .muted { color:#6b7280; font-size:14px; margin-top:8px; }
+    .tips {
+      margin-top:18px; padding:16px; border-radius:18px; background:#f9fafb; border:1px dashed #d1d5db;
+      color:#374151; line-height:1.6;
+    }
+    @media (max-width: 960px) {
+      .grid, .row { grid-template-columns: 1fr; }
+      .chat { height: 360px; }
+      .hero h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Samsung AI Home Docent</h1>
+      <p>무료 하루 체험용 데모입니다. 아파트 정보와 라이프스타일을 입력하면 룰 기반 로직으로 냉장고, TV, 세탁기 추천과 제품 비교, 매장 동선 안내, 견적 요약을 체험할 수 있습니다.</p>
+    </section>
+
+    <div class="grid">
+      <div>
+        <section class="card">
+          <div class="head">
+            <h2>1단계. 우리집 정보 입력</h2>
+            <span class="badge">완전 무료 데모</span>
+          </div>
+
+          <div class="row">
+            <div class="field full">
+              <label>아파트 이름</label>
+              <input id="aptName" value="광교 자연앤힐스테이트" placeholder="예: 광교 자연앤힐스테이트" />
+            </div>
+            <div class="field">
+              <label>평형</label>
+              <select id="area">
+                <option>24평</option>
+                <option>30평</option>
+                <option selected>34평</option>
+                <option>42평</option>
+                <option>48평 이상</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>방 개수</label>
+              <select id="rooms">
+                <option>2개</option>
+                <option selected>3개</option>
+                <option>4개</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>가족 수</label>
+              <select id="familySize">
+                <option>1인</option>
+                <option>2인</option>
+                <option selected>3~4인</option>
+                <option>4인 이상</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>우선순위</label>
+              <select id="priority">
+                <option selected>공간 효율</option>
+                <option>디자인</option>
+                <option>가성비</option>
+                <option>프리미엄</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label>추가 요청</label>
+              <textarea id="needs" placeholder="예: 영화 감상용 TV를 원해요 / 세탁기 소음이 적었으면 좋겠어요"></textarea>
+            </div>
+          </div>
+
+          <div class="btns">
+            <button class="primary" id="startBtn">맞춤 추천 시작</button>
+            <button class="subtle" ON-CLICK="quickAsk('냉장고 추천해줘')">냉장고 추천</button>
+            <button class="subtle" ON-CLICK="quickAsk('TV 비교해줘')">TV 비교</button>
+            <button class="subtle" ON-CLICK="quickAsk('매장 길 안내해줘')">길 안내</button>
+            <button class="warning" ON-CLICK="resetDemo()">초기화</button>
+          </div>
+
+          <div class="tips">
+            <strong>현장 추천 질문</strong><br>
+            · 우리 집에 맞는 냉장고 추천해줘<br>
+            · TV 두 모델 차이 알려줘<br>
+            · TV 존 어디야?<br>
+            · 선택한 제품 견적 내줘
+          </div>
+        </section>
+
+        <section class="card" style="margin-top:24px;">
+          <div class="head">
+            <h2>2단계. 추천 제품 / 견적</h2>
+            <span class="badge">실시간 반영</span>
+          </div>
+          <div id="productList" class="list"></div>
+          <div id="estimateBox" class="estimate"></div>
+        </section>
+      </div>
+
+      <div>
+        <section class="card">
+          <div class="head">
+            <h2>도슨트 대화 체험</h2>
+            <span class="badge">룰 기반 응답</span>
+          </div>
+          <div id="chat" class="chat"></div>
+          <div class="chatInput">
+            <input id="message" placeholder="예: 우리 집에 맞는 냉장고 추천해줘" />
+            <button class="primary" id="sendBtn">전송</button>
+          </div>
+          <div class="btns">
+            <button class="subtle" ON-CLICK="quickAsk('냉장고 존으로 안내해줘')">냉장고 존</button>
+            <button class="subtle" ON-CLICK="quickAsk('TV 비교해줘')">TV 비교</button>
+            <button class="subtle" ON-CLICK="quickAsk('선택한 제품 견적 내줘')">견적 내기</button>
+            <button class="subtle" ON-CLICK="quickAsk('추천 이유 알려줘')">추천 이유</button>
+          </div>
+          <div class="muted">이 데모는 GPT 없이 브라우저에서만 동작합니다.</div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const productDB = {
+      fridge: [
+        { id: 'fridge-001', name: 'Bespoke 4도어 냉장고', price: 4200000, zone: '1존', tags: ['대용량', '맞춤 패널', '주방 추천'], summary: '가족 단위 수납에 적합한 대용량 냉장고입니다.', tier: 'premium' },
+        { id: 'fridge-002', name: 'Bespoke 2도어 냉장고', price: 2490000, zone: '1존', tags: ['공간 효율', '미니멀', '1~2인 추천'], summary: '작은 주방에도 어울리는 효율형 냉장고입니다.', tier: 'value' }
+      ],
+      tv: [
+        { id: 'tv-001', name: 'Neo QLED TV 65형', price: 3100000, zone: '2존', tags: ['거실 추천', '밝은 화면', '프리미엄 화질'], summary: '34평 전후 거실에서 밸런스가 좋은 프리미엄 TV입니다.', tier: 'premium' },
+        { id: 'tv-002', name: 'OLED TV 65형', price: 3590000, zone: '2존', tags: ['영화 감상', '깊은 블랙', '몰입감'], summary: '영화나 OTT 감상 비중이 높을 때 잘 맞는 TV입니다.', tier: 'premium' },
+        { id: 'tv-003', name: 'QLED TV 55형', price: 1890000, zone: '2존', tags: ['가성비', '거실 입문형', '합리적'], summary: '가격과 화질의 균형이 좋은 실속형 TV입니다.', tier: 'value' }
+      ],
+      washer: [
+        { id: 'washer-001', name: 'Bespoke AI 세탁기 + 건조기', price: 2800000, zone: '3존', tags: ['세탁실 추천', 'AI 절약 모드', '패키지'], summary: '세탁실 동선과 편의성을 함께 고려한 패키지입니다.', tier: 'premium' },
+        { id: 'washer-002', name: '그랑데 세탁기 + 건조기', price: 2190000, zone: '3존', tags: ['실속형', '가성비', '가족용'], summary: '가성비 중심으로 많이 선택하는 세탁 패키지입니다.', tier: 'value' }
+      ]
+    };
+
+    const chatEl = document.getElementById('chat');
+    const productListEl = document.getElementById('productList');
+    const estimateBoxEl = document.getElementById('estimateBox');
+
+    let selectedProductIds = [];
+    let currentRecommendations = [];
+
+    function won(v) {
+      const sign = v < 0 ? '-' : '';
+      return sign + new Intl.NumberFormat('ko-KR').format(Math.abs(v)) + '원';
+    }
+
+    function getProfile() {
+      return {
+        apartmentName: document.getElementById('aptName').value.trim(),
+        area: document.getElementById('area').value,
+        rooms: Number((document.getElementById('rooms').value || '0').replace(/\D/g, '')),
+        familySize: document.getElementById('familySize').value,
+        priority: document.getElementById('priority').value,
+        needs: document.getElementById('needs').value.trim()
+      };
+    }
+
+    function parseArea(areaText) {
+      const n = String(areaText).match(/\d+/);
+      return n ? Number(n[0]) : 0;
+    }
+
+    function addBubble(text, role) {
+      const div = document.createElement('div');
+      div.className = 'bubble ' + role;
+      div.textContent = text;
+      chatEl.appendChild(div);
+      chatEl.scrollTop = chatEl.scrollHeight;
+    }
+
+    function getRecommendedSet(profile) {
+      const area = parseArea(profile.area);
+      const largeFamily = profile.familySize === '3~4인' || profile.familySize === '4인 이상';
+      const premium = profile.priority === '프리미엄' || profile.priority === '디자인';
+      const value = profile.priority === '가성비';
+      const movie = /영화|넷플릭스|ott|영상/i.test(profile.needs);
+      const quiet = /소음|조용/i.test(profile.needs);
+
+      const fridge = value || area < 30 ? productDB.fridge[1] : productDB.fridge[0];
+      let tv = productDB.tv[0];
+      if (movie) tv = productDB.tv[1];
+      else if (value || area < 30) tv = productDB.tv[2];
+      else if (premium) tv = productDB.tv[0];
+
+      const washer = (quiet || largeFamily || premium) ? productDB.washer[0] : productDB.washer[1];
+      return [fridge, tv, washer];
+    }
+
+    function renderProducts(items) {
+      currentRecommendations = items;
+      if (!items.length) {
+        productListEl.innerHTML = '<div class="product"><h3>추천 결과가 없습니다</h3><p>먼저 맞춤 추천 시작을 눌러주세요.</p></div>';
+        return;
+      }
+      productListEl.innerHTML = items.map(item => `
+        <div class="product">
+          <h3>${item.name}</h3>
+          <p>${item.summary}</p>
+          <div class="tags">
+            <span class="tag">${item.zone}</span>
+            <span class="tag">${won(item.price)}</span>
+            ${(item.tags || []).map(tag => `<span class="tag">${tag}</span>`).join('')}
+          </div>
+          <div class="btns" style="margin-top:12px;">
+            <button class="subtle" ON-CLICK="toggleProduct('${item.id}')">${selectedProductIds.includes(item.id) ? '선택 해제' : '견적에 담기'}</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function getSelectedProducts() {
+      const all = [...productDB.fridge, ...productDB.tv, ...productDB.washer];
+      return all.filter(item => selectedProductIds.includes(item.id));
+    }
+
+    function renderEstimate() {
+      const items = getSelectedProducts();
+      const subtotal = items.reduce((sum, item) => sum + item.price, 0);
+      const discount = items.length >= 2 ? 400000 : 0;
+      const total = subtotal - discount;
+      estimateBoxEl.innerHTML = `
+        <h3 style="margin:0 0 12px;">우리집 맞춤 견적</h3>
+        ${(items.length ? items : [{name:'선택된 제품 없음', price:null}]).map(item => `
+          <div class="estimate-row"><span>${item.name}</span><strong>${item.price === null ? '-' : won(item.price)}</strong></div>
+        `).join('')}
+        <div class="estimate-row"><span>패키지 할인</span><strong>${won(-discount)}</strong></div>
+        <div class="total"><span>총 예상 금액</span><span>${won(total)}</span></div>
+      `;
+    }
+
+    function toggleProduct(id) {
+      if (selectedProductIds.includes(id)) selectedProductIds = selectedProductIds.filter(v => v !== id);
+      else selectedProductIds.push(id);
+      renderProducts(currentRecommendations);
+      renderEstimate();
+      addBubble('선택 제품이 업데이트되었습니다. 현재 견적을 다시 확인해보세요.', 'ai');
+    }
+
+    function compareTv() {
+      const a = productDB.tv[0];
+      const b = productDB.tv[1];
+      return `TV 비교 결과입니다.\n- ${a.name}: 밝은 화면과 범용성이 강점입니다.\n- ${b.name}: 영화 감상과 어두운 장면 표현에 강점이 있습니다.\n영화 감상이 많으면 OLED, 전체적으로 무난한 추천은 Neo QLED입니다.`;
+    }
+
+    function getRoute(text) {
+      if (/냉장고/.test(text)) return '냉장고 체험존은 입구 기준 왼쪽 1존입니다. 직진 후 좌측으로 이동하시면 됩니다.';
+      if (/tv|티비|텔레비전/i.test(text)) return 'TV 체험존은 중앙 통로를 따라 직진한 뒤 2존입니다. Neo QLED와 OLED를 비교해보실 수 있습니다.';
+      if (/세탁기|건조기/.test(text)) return '세탁기 체험존은 오른쪽 뒤편 생활가전 구역 3존입니다.';
+      return '냉장고는 1존, TV는 2존, 세탁기는 3존입니다. 원하시는 카테고리를 말씀해주시면 더 자세히 안내해드릴게요.';
+    }
+
+    function explainRecommendation(profile) {
+      const recs = getRecommendedSet(profile);
+      const area = parseArea(profile.area);
+      return `${profile.apartmentName || '입력하신 아파트'}의 ${profile.area}, 방 ${profile.rooms}개, ${profile.familySize} 기준으로 추천했습니다.\n- 냉장고: 주방 공간과 가족 수를 기준으로 선정\n- TV: 거실 크기와 시청 성향을 기준으로 선정\n- 세탁기: 사용 편의성과 세탁실 동선을 기준으로 선정\n현재 ${area >= 34 ? '중대형 평형' : '중소형 평형'}에 맞는 조합입니다.`;
+    }
+
+    function respond(text) {
+      const profile = getProfile();
+      const lower = text.toLowerCase();
+
+      if (/추천 시작|추천해줘|우리 집에 맞는/.test(text)) {
+        const recs = getRecommendedSet(profile);
+        currentRecommendations = recs;
+        selectedProductIds = recs.map(item => item.id);
+        renderProducts(recs);
+        renderEstimate();
+        return `${profile.apartmentName || '입력하신 아파트'} 기준으로 추천을 시작할게요.\n${explainRecommendation(profile)}\n\n추천 제품은 아래 카드와 견적 영역에서 바로 확인하실 수 있습니다.`;
+      }
+      if (/비교/.test(text) && (/tv|티비|텔레비전/i.test(text) || !text.match(/냉장고|세탁기/))) {
+        return compareTv();
+      }
+      if (/길|어디|존|안내/.test(text)) {
+        return getRoute(text);
+      }
+      if (/견적/.test(text)) {
+        const items = getSelectedProducts();
+        if (!items.length) return '아직 견적에 담긴 제품이 없습니다. 먼저 맞춤 추천을 시작하거나 제품을 선택해 주세요.';
+        const subtotal = items.reduce((sum, item) => sum + item.price, 0);
+        const discount = items.length >= 2 ? 400000 : 0;
+        return `현재 선택한 제품 기준 견적입니다.\n- 제품 수: ${items.length}개\n- 상품 합계: ${won(subtotal)}\n- 패키지 할인: ${won(-discount)}\n- 총 예상 금액: ${won(subtotal - discount)}`;
+      }
+      if (/이유|왜/.test(text)) {
+        return explainRecommendation(profile);
+      }
+      if (/냉장고/.test(text)) {
+        const rec = getRecommendedSet(profile)[0];
+        return `냉장고는 ${rec.name}를 추천합니다. 이유는 ${profile.familySize} 기준 수납량, ${profile.priority} 우선순위, 주방 공간 활용 측면에서 잘 맞기 때문입니다. 실물은 1존에서 보실 수 있습니다.`;
+      }
+      if (/세탁기|건조기/.test(text)) {
+        const rec = getRecommendedSet(profile)[2];
+        return `세탁기는 ${rec.name}를 추천합니다. 세탁실 동선과 사용 편의성, 현재 입력하신 조건을 기준으로 가장 잘 맞는 조합입니다. 3존에서 체험하실 수 있습니다.`;
+      }
+      if (/tv|티비|텔레비전/i.test(text)) {
+        const rec = getRecommendedSet(profile)[1];
+        return `TV는 ${rec.name}를 추천합니다. 거실 크기와 시청 목적에 잘 맞는 모델이며 2존에서 바로 비교 체험이 가능합니다.`;
+      }
+      return '질문 감사합니다. 냉장고 추천, TV 비교, 매장 길 안내, 견적 내기 같은 질문으로 체험하시면 더 자연스럽게 보입니다.';
+    }
+
+    function quickAsk(text) {
+      addBubble(text, 'user');
+      addBubble(respond(text), 'ai');
+    }
+
+    function resetDemo() {
+      selectedProductIds = [];
+      currentRecommendations = [];
+      chatEl.innerHTML = '';
+      renderProducts([]);
+      renderEstimate();
+      addBubble('안녕하세요. Samsung AI Home Docent입니다. 오늘은 무료 체험용 데모로 제품 추천, 비교, 길 안내, 견적 기능을 체험하실 수 있습니다.', 'ai');
+      addBubble('왼쪽에서 아파트 정보를 입력한 뒤 “맞춤 추천 시작”을 눌러보세요.', 'ai');
+    }
+
+    document.getElementById('startBtn').addEventListener('click', () => quickAsk('맞춤 추천 시작'));
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      const input = document.getElementById('message');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      quickAsk(text);
+    });
+    document.getElementById('message').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') document.getElementById('sendBtn').click();
+    });
+
+    resetDemo();
+  </script>
+</body>
+</html>
